@@ -1,6 +1,6 @@
 package com.test.testpdfa;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +19,13 @@ public class PdfServiceTest {
 	public void testIsPdfASuccess1() throws IOException {
 		boolean isPdfA = PdfService.isPdfA(new File("test-pdfa.pdf"));
 		assertEquals(true, isPdfA);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testIsPdfANPE() throws IOException {
+		// currently in PDFBox 1.8.3 this throws NPE, this should be fixed in
+		// PDFBox 2.0
+		PdfService.isPdfA(new File("test-npe-error.pdf"));
 	}
 
 }
